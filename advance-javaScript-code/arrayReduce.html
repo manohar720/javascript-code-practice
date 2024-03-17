@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array Reduce method</title>
+    <script type="text/javascript">
+      //(Aggregation) -Sum all the elements of the array or multiply all the elements of the
+      //array.
+      const arr = [1, 2, 3, 4];
+      const sum = arr.reduce((previousValue, currentValue) => {
+        const nextValue = previousValue + currentValue;
+        return nextValue;
+      }, 0);
+      console.log(sum);
+      // 10
+      const product = arr.reduce((previousValue, currentValue) => {
+        const nextValue = previousValue * currentValue;
+        return nextValue;
+      }, 1);
+      console.log(product);
+      // 24
+      //...........................................
+      //   Segregation-We can group a certain set of values depending on our requirements
+      const arr1 = [1.1, 1.2, 1.3, 2.2, 2.3, 2.4];
+      const segregate = arr1.reduce((previousValue, currentValue) => {
+        console.log("previousValue: ", typeof previousValue);
+        // round of the value
+        const floored = Math.floor(currentValue);
+
+        // if the key is not present
+        // create a new entry with the array value
+
+        if (!previousValue[floored]) {
+          previousValue[floored] = [];
+        }
+        previousValue[floored].push(currentValue);
+        // return the updated value
+        return previousValue;
+      }, {});
+      console.log(segregate);
+    </script>
+  </head>
+  <body></body>
+</html>
