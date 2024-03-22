@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>working of promise</title>
+    <script>
+      // Create  a promise that will resolve after  5 second
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("Hello World!");
+        }, 5000);
+      });
+
+      console.log(promise); //intially pending status
+
+      //After 5 seconds, the state of the promise will be updated in Fullfilled
+      setTimeout(() => {
+        console.log(promise);
+      }, 6000);
+
+      //We can assign the .then( onResolvedFn , onRejectedFn ) method to the
+      // promise but the onResolvedFn callback function will be called only
+      // after the promise is resolved and will have the value.
+      promise.then((val) => {
+        console.log(val);
+      });
+      // "Hello World!" // after the promise is resolved that is after 5 seconds
+
+      //Promise Chaining
+      promise
+        .then((val) => {
+          return val + "How are you";
+        })
+        .then((val) => {
+          return val + " this is Manohar";
+        })
+        .then((val) => {
+          console.log(val);
+        })
+
+        //We can attach a finally block independently to the then , as well as
+        //catch , and it will be invoked at the end
+        .finally(() => {
+          console.log("task done");
+        });
+
+      //Similarly, let’s say we reject a promise after 5 seconds, then we can
+      //either use the .then(null, onRejectedFn) or .catch(onRejectedFn) .
+
+      const promise1 = new Promise((resolve, reject) => {
+        // a promise that will reject after
+        // 5 second
+        setTimeout(() => {
+          reject("Error 404");
+        }, 5000);
+      });
+      promise1.then(null, (error) => {
+        console.error("Called from then method", error);
+      });
+      // "Called from then method" "Error 404"
+      promise1.catch((error) => {
+        console.error("Called from catch method", error);
+      });
+    </script>
+  </head>
+  <body></body>
+</html>
