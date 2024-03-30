@@ -65,6 +65,45 @@
         },
       };
       example3.displayBlog();
+
+      //The context is set at the time of invocation, thus if we update the value
+      //of the object property value, it will be reflected.
+
+      const example4 = {
+        blog: "mCoder",
+        displayBlog: function () {
+          // this refers to the current object
+          console.log(this === example4);
+          console.log(this.blog);
+        },
+      };
+      example4.blog = "MDN";
+      example4.displayBlog();
+      // true
+      // "MDN"
+
+      //If the object is passed as a reference, then the context is shared
+      //between both the variables, the original and the one that has the reference.
+
+      const example6 = {
+        blog: "learnersbucket",
+        displayBlog: function () {
+          // this refers to the current object
+          console.log(this === example6);
+          console.log(this === example7);
+          console.log(this.blog);
+        },
+      };
+      const example7 = example6;
+      example7.blog = "MDN";
+      example6.displayBlog();
+      // true
+      // true
+      // "MDN"
+      example7.displayBlog();
+      // true
+      // true
+      // "MDN"
     </script>
   </head>
   <body></body>
